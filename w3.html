@@ -1,0 +1,67 @@
+<!-- Hidden Link: https://jaredisanlstreamer.github.io/w4.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Hunt</title>
+    <style>
+        body {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .button {
+            width: 80px;
+            height: 40px;
+            margin: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            border: 2px solid #333;
+            background-color: #fff;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        .button:hover {
+            background-color: #ddd;
+            border-color: #555;
+        }
+        .hidden-textbox {
+            display: none;
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 1.2em;
+            color: #333;
+            border: 1px solid #333;
+            background-color: #fff;
+        }
+    </style>
+    <script>
+        function checkButton(buttonNumber) {
+            if (buttonNumber === 57) {
+                document.getElementById('secret-textbox').style.display = 'block';
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="container">
+        <!-- Manually included buttons -->
+        <button class="button" onclick="checkButton(1)">Button 1</button>
+        <button class="button" onclick="checkButton(2)">Button 2</button>
+        <!-- Add more buttons as needed -->
+        <button class="button" onclick="checkButton(57)">Button 57</button>
+        <!-- Continue adding buttons up to 100 -->
+        <button class="button" onclick="checkButton(100)">Button 100</button>
+
+        <div id="secret-textbox" class="hidden-textbox">
+            Maybe inspect the source code???
+        </div>
+    </div>
+</body>
+</html>

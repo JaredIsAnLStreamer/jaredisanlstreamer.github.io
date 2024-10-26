@@ -114,25 +114,32 @@
 
         // Show dialog on click and reset timer
         function showDialog() {
+            const dialogElement = document.getElementById("dialog");
+            const dialogText = document.getElementById("dialog-text");
+            
             if (dialogIndex < dialogMessages.length) {
-                const dialogElement = document.getElementById("dialog");
-                const dialogText = document.getElementById("dialog-text");
                 dialogText.textContent = dialogMessages[dialogIndex];
                 dialogElement.style.display = "block";
                 dialogIndex++;
                 resetInactivityTimer();
             } else {
-                setTimeout(() => {
-                    window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
-                }, 3000);
+                dialogElement.style.display = "none"; // Hide dialog when done
+                redirectAfterDialog();
             }
+        }
+
+        // Handle redirection after all dialogs are shown
+        function redirectAfterDialog() {
+            setTimeout(() => {
+                window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"; // Redirect to Rickroll
+            }, 3000); // Delay for 3 seconds before redirecting
         }
 
         // Reset inactivity timeout
         function resetInactivityTimer() {
             clearTimeout(inactivityTimer);
             inactivityTimer = setTimeout(() => {
-                window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+                window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"; // Redirect after 1 minute of inactivity
             }, 60000);
         }
 
@@ -140,8 +147,8 @@
         document.body.addEventListener("click", () => {
             if (effectTriggered) {
                 const dialogElement = document.getElementById("dialog");
-                dialogElement.style.display = "none";
-                showDialog();
+                dialogElement.style.display = "none"; // Hide previous dialog
+                showDialog(); // Show next dialog
             }
         });
     </script>

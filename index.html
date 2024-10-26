@@ -3,80 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>L Jared</title>
+    <title>Has Flames 200% been FCed?</title>
     <style>
         body {
-            background-color: #1e1e1e;
-            color: #f1f1f1;
+            background-color: #fff; /* Initial background color */
+            color: #000; /* Initial text color */
             font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
             position: relative;
         }
         h1 {
-            font-size: 3em;
-            color: #ff6f61;
-        }
-        p {
-            font-size: 1.5em;
-            line-height: 1.6em;
-        }
-        img {
-            width: 300px;
-            border-radius: 15px;
-            margin-top: 20px;
-        }
-        .button {
-            display: inline-block;
-            padding: 10px 20px;
-            font-size: 1em;
-            color: #fff;
-            background-color: #ff6f61;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 20px;
-        }
-        .button:hover {
-            background-color: #ff4b3a;
-        }
-        .metal-pipe {
-            font-size: 2em;
-            margin-top: 30px;
-        }
-        footer {
-            margin-top: 30px;
-            font-size: 0.9em;
-            color: #aaa;
-        }
-        .secret-button {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            width: 60px;
-            height: auto;
-            border-radius: 10px;
+            font-size: 15em;
+            margin: 0;
             cursor: pointer;
-            border: none;
+        }
+        .shake {
+            animation: shake 0.5s infinite;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translate(0); }
+            25% { transform: translate(-10px, 0); }
+            50% { transform: translate(10px, 0); }
+            75% { transform: translate(-10px, 0); }
+        }
+        #dialog {
+            display: none; /* Hidden initially */
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
-    <h1>jared bad</h1>
-    <p>
-        Can we say <strong>"L Jared"</strong> in the chat?! <br>
-        Let's make fun of him for not being able to speak for however long the timer is left! (edit timer is over, sadge)<br>
-        At least the metal pipe is with us 
-    </p>
-    <img src="https://toptwitchstreamers.com/wp-content/uploads/2021/10/CarnyJared-Viral.jpg" alt="Jared">
-    <div class="metal-pipe">🔨 <--- imagine it's a metal pipe</div>
-    <a href="https://twitch.tv/CarnyJared" target="_blank" class="button">Carny Twitch</a>
-    <a href="https://discord.gg/4tg6u5qzNb" target="_blank" class="button">The Carnival</a>
-    <br>
-    <footer>can u pls hire me as ur website designer :3</footer>
-
-    <!-- Secret button -->
-    <button class="secret-button" onclick="window.location.href='https://jaredisanlstreamer.github.io/w.html'">
-        <img src="https://toptwitchstreamers.com/wp-content/uploads/2021/10/CarnyJared-Viral.jpg" alt="Secret Button" style="width: 100%; border-radius: 10px;">
-    </button>
+    <div>
+        <h1 msg="you're worst, i hope you know that">No.</h1>
+        <div id="dialog">
+            <p id="dialog-text"></p>
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>

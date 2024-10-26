@@ -138,9 +138,11 @@
 
         // Hide previous dialog and show next on click
         document.body.addEventListener("click", () => {
-            const dialogElement = document.getElementById("dialog");
-            dialogElement.style.display = "none";
-            showDialog();
+            if (effectTriggered) {
+                const dialogElement = document.getElementById("dialog");
+                dialogElement.style.display = "none";
+                showDialog();
+            }
         });
     </script>
 </body>

@@ -1,4 +1,4 @@
-const initialDialogs = [
+const dialogs = [
     "You fool.",
     "I bet you think you're clever, right?",
     "That's adorable. But it'll take more to outsmart me.",
@@ -29,16 +29,18 @@ const alterDialogs = [
 let dialogIndex = 0;
 let alterDialogIndex = 0;
 let altered = false;
+let observerDisconnected = false;
 const h1Element = document.querySelector("h1");
 const dialogDiv = document.getElementById("dialog");
 const dialogText = document.getElementById("dialog-text");
 let timeout;
+let h1Original = h1Element.innerText;
 
 const changeBackgroundAndStartDialog = () => {
     document.body.style.backgroundColor = "#000";
     document.body.style.color = "#f00";
     h1Element.classList.add("shake");
-    showDialog(initialDialogs);
+    showDialog(altered ? alterDialogs : dialogs);
 };
 
 const showDialog = (dialogArray) => {
@@ -72,22 +74,48 @@ const redirectToVideo = () => {
     window.location.href = "https://www.youtube.com/watch?v=7h7bnYA1LXE"; // Redirect to the specified video
 };
 
-const mutationObserver = new MutationObserver(() => {
-    if (h1Element.innerText !== "No." && !altered) {
+// Function to handle disconnection
+const handleDisconnection = () => {
+    if (!observerDisconnected) {
+        observerDisconnected = true;
         altered = true;
-        changeBackgroundAndStartDialog(alterDialogs);
+        changeBackgroundAndStartDialog();
+    }
+};
+
+// Polling mechanism to check for changes
+setInterval(() => {
+    if (h1Element.innerText !== h1Original && !altered) {
+        altered = true;
+        changeBackgroundAndStartDialog();
+    }
+    if (observerDisconnected) {
+        showDialog(alterDialogs);
+    }
+}, 500); // Check every 500ms
+
+// MutationObserver to monitor changes
+const observer = new MutationObserver((mutations) => {
+    for (const mutation of mutations) {
+        if (mutation.type === 'childList' || mutation.type === 'attributes') {
+            if (h1Element.innerText !== h1Original) {
+                handleDisconnection();
+            }
+        }
     }
 });
 
-mutationObserver.observe(h1Element, { characterData: true, childList: true, subtree: true });
+// Start observing the <h1> element
+observer.observe(h1Element, { childList: true, attributes: true });
 
+// Document click event to show the next dialog
 document.body.addEventListener("click", () => {
     if (altered) {
         showDialog(alterDialogs);
     } else {
-        showDialog(initialDialogs);
+        showDialog(dialogs);
     }
 });
 
-// Initialize the dialog when the page loads
-changeBackgroundAndStartDialog(initialDialogs);
+// Initialize without changing background or text
+dialogDiv.style.display = "none"; // Hide the dialog initially

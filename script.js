@@ -29,7 +29,6 @@ const alterDialogs = [
 let dialogIndex = 0;
 let alterDialogIndex = 0;
 let altered = false;
-let observerDisconnected = false;
 const h1Element = document.querySelector("h1");
 const dialogDiv = document.getElementById("dialog");
 const dialogText = document.getElementById("dialog-text");
@@ -37,9 +36,9 @@ let timeout;
 let h1Original = h1Element.innerText;
 
 const changeBackgroundAndStartDialog = () => {
-    document.body.style.backgroundColor = "#000";
-    document.body.style.color = "#f00";
-    h1Element.classList.add("shake");
+    document.body.style.backgroundColor = "#000"; // Change to black
+    document.body.style.color = "#f00"; // Change text to red
+    h1Element.classList.add("shake"); // Add shaking effect
     showDialog(altered ? alterDialogs : dialogs);
 };
 
@@ -54,7 +53,7 @@ const showDialog = (dialogArray) => {
     } else {
         if (dialogIndex < dialogArray.length) {
             dialogText.textContent = dialogArray[dialogIndex++];
-            dialogDiv.style.display = "block";
+            dialogDiv.style.display = "block"; // Show dialog
             resetTimer();
         } else {
             dialogDiv.style.display = "none";
@@ -74,27 +73,12 @@ const redirectToVideo = () => {
     window.location.href = "https://www.youtube.com/watch?v=7h7bnYA1LXE"; // Redirect to the specified video
 };
 
-// Function to handle disconnection
 const handleDisconnection = () => {
-    if (!observerDisconnected) {
-        observerDisconnected = true;
-        altered = true;
-        changeBackgroundAndStartDialog();
-    }
+    altered = true;
+    changeBackgroundAndStartDialog(); // Change background and start dialog
 };
 
-// Polling mechanism to check for changes
-setInterval(() => {
-    if (h1Element.innerText !== h1Original && !altered) {
-        altered = true;
-        changeBackgroundAndStartDialog();
-    }
-    if (observerDisconnected) {
-        showDialog(alterDialogs);
-    }
-}, 500); // Check every 500ms
-
-// MutationObserver to monitor changes
+// Monitor changes to the <h1> element
 const observer = new MutationObserver((mutations) => {
     for (const mutation of mutations) {
         if (mutation.type === 'childList' || mutation.type === 'attributes') {
@@ -117,5 +101,5 @@ document.body.addEventListener("click", () => {
     }
 });
 
-// Initialize without changing background or text
-dialogDiv.style.display = "none"; // Hide the dialog initially
+// Keep the initial background and text as they are
+dialogDiv.style.display = "none"; // Hide dialog initially

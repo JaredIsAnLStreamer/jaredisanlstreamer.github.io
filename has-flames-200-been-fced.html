@@ -10,19 +10,161 @@
             color: #000;
             font-family: Arial, sans-serif;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
+            transition: background-color 0.5s, color 0.5s;
         }
         h1 {
             font-size: 15em;
             margin: 0;
             cursor: pointer;
+            transition: color 0.5s;
+        }
+        .dialog {
+            font-size: 1.5em;
+            margin-top: 20px;
+            padding: 10px;
+            border: 2px solid #f00;
+            background-color: #111;
+            color: #f00;
+            width: fit-content;
+            text-align: left;
+            display: none;
+        }
+        .dialog-header {
+            font-weight: bold;
+            font-size: 0.8em;
+            color: #f00;
+        }
+        .dialog-text {
+            font-size: 1em;
+            color: #fff;
+            margin-top: 5px;
+        }
+        .shake {
+            animation: shake 0.5s infinite;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
         }
     </style>
 </head>
 <body>
     <h1>No.</h1>
+    <!-- Dialog Boxes -->
+    <div class="dialog" id="dialog1">
+        <div class="dialog-header">carnyjaredisanlstreamer.github.io says:</div>
+        <div class="dialog-text">"You fool."</div>
+    </div>
+    <div class="dialog" id="dialog2">
+        <div class="dialog-header">carnyjaredisanlstreamer.github.io says:</div>
+        <div class="dialog-text">"I bet you think you're clever, right?"</div>
+    </div>
+    <div class="dialog" id="dialog3">
+        <div class="dialog-header">carnyjaredisanlstreamer.github.io says:</div>
+        <div class="dialog-text">"That's adorable. But it'll take more to beat me."</div>
+    </div>
+    <div class="dialog" id="dialog4">
+        <div class="dialog-header">carnyjaredisanlstreamer.github.io says:</div>
+        <div class="dialog-text">"You know, I was once like you... curious and mischievous."</div>
+    </div>
+    <div class="dialog" id="dialog5">
+        <div class="dialog-header">carnyjaredisanlstreamer.github.io says:</div>
+        <div class="dialog-text">"But that just led you into my trap."</div>
+    </div>
+    <div class="dialog" id="dialog6">
+        <div class="dialog-header">carnyjaredisanlstreamer.github.io says:</div>
+        <div class="dialog-text">"This is war."</div>
+    </div>
+    <div class="dialog" id="dialog7">
+        <div class="dialog-header">carnyjaredisanlstreamer.github.io says:</div>
+        <div class="dialog-text">"I fight for what I believe in. No cheap tricks here."</div>
+    </div>
+    <div class="dialog" id="dialog8">
+        <div class="dialog-header">carnyjaredisanlstreamer.github.io says:</div>
+        <div class="dialog-text">"I'll defend my title and my beliefs."</div>
+    </div>
+    <div class="dialog" id="dialog9">
+        <div class="dialog-header">carnyjaredisanlstreamer.github.io says:</div>
+        <div class="dialog-text">"I’m always one step ahead."</div>
+    </div>
+    <div class="dialog" id="dialog10">
+        <div class="dialog-header">carnyjaredisanlstreamer.github.io says:</div>
+        <div class="dialog-text">"War... never changes."</div>
+    </div>
+    <div class="dialog" id="dialog11">
+        <div class="dialog-header">carnyjaredisanlstreamer.github.io says:</div>
+        <div class="dialog-text">"Perhaps we’ll meet again someday. I’ll be waiting."</div>
+    </div>
+    <div class="dialog" id="dialog12">
+        <div class="dialog-header">carnyjaredisanlstreamer.github.io says:</div>
+        <div class="dialog-text">"For now, enjoy this little surprise. You've earned it."</div>
+    </div>
+
+    <script>
+        let dialogs = [
+            "dialog1", "dialog2", "dialog3", "dialog4", "dialog5",
+            "dialog6", "dialog7", "dialog8", "dialog9", "dialog10",
+            "dialog11", "dialog12"
+        ];
+        let dialogIndex = 0;
+        let inactivityTimer;
+
+        // Start the dialog sequence with animations and effects
+        function startDialog() {
+            document.body.style.backgroundColor = "#000";
+            document.body.style.color = "#f00";
+            document.querySelector("h1").classList.add("shake");
+            showDialog();
+
+            // Reset inactivity timer each time a dialog appears
+            resetInactivityTimer();
+        }
+
+        // Show dialogs in sequence
+        function showDialog() {
+            if (dialogIndex < dialogs.length) {
+                let currentDialog = document.getElementById(dialogs[dialogIndex]);
+                currentDialog.style.display = "block";
+                dialogIndex++;
+                resetInactivityTimer();
+                setTimeout(showDialog, 3000);  // Show each dialog every 3 seconds
+            } else {
+                setTimeout(() => {
+                    window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+                }, 3000);
+            }
+        }
+
+        // Reset the inactivity timeout to 1 minute each time a dialog is shown
+        function resetInactivityTimer() {
+            clearTimeout(inactivityTimer);
+            inactivityTimer = setTimeout(() => {
+                window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+            }, 60000);  // 1 minute of inactivity
+        }
+
+        // Detect if DevTools is open
+        let isDevToolsOpen = false;
+        setInterval(function () {
+            const before = new Date().getTime();
+            debugger;
+            const after = new Date().getTime();
+            if (after - before > 100) {
+                if (!isDevToolsOpen) {
+                    isDevToolsOpen = true;
+                    startDialog();
+                }
+            } else {
+                isDevToolsOpen = false;
+            }
+        }, 1000);
+    </script>
 </body>
 </html>

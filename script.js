@@ -33,8 +33,8 @@ const h1Element = document.querySelector("h1");
 const dialogDiv = document.getElementById("dialog");
 const dialogText = document.getElementById("dialog-text");
 let timeout;
-let h1Original = h1Element.innerText;
 
+// Function to change background and start dialog
 const changeBackgroundAndStartDialog = () => {
     document.body.style.backgroundColor = "#000"; // Change to black
     document.body.style.color = "#f00"; // Change text to red
@@ -42,10 +42,13 @@ const changeBackgroundAndStartDialog = () => {
     showDialog(altered ? alterDialogs : dialogs);
 };
 
+// Function to show dialog
 const showDialog = (dialogArray) => {
     if (altered) {
         if (alterDialogIndex < dialogArray.length) {
             dialogText.textContent = dialogArray[alterDialogIndex++];
+            dialogDiv.style.display = "block"; // Show dialog
+            resetTimer();
         } else {
             dialogDiv.style.display = "none";
             setTimeout(redirectToVideo, 3000);
@@ -62,6 +65,7 @@ const showDialog = (dialogArray) => {
     }
 };
 
+// Reset timer function for inactivity
 const resetTimer = () => {
     clearTimeout(timeout);
     timeout = setTimeout(() => {
@@ -69,20 +73,22 @@ const resetTimer = () => {
     }, 60000);
 };
 
+// Function to redirect to a video
 const redirectToVideo = () => {
     window.location.href = "https://www.youtube.com/watch?v=7h7bnYA1LXE"; // Redirect to the specified video
 };
 
+// Handle modifications
 const handleDisconnection = () => {
-    altered = true;
+    altered = true; // Set altered to true
     changeBackgroundAndStartDialog(); // Change background and start dialog
 };
 
-// Monitor changes to the <h1> element
+// Observe changes to the <h1> element
 const observer = new MutationObserver((mutations) => {
     for (const mutation of mutations) {
         if (mutation.type === 'childList' || mutation.type === 'attributes') {
-            if (h1Element.innerText !== h1Original) {
+            if (h1Element.innerText !== "No.") { // Change this to your original text
                 handleDisconnection();
             }
         }
@@ -92,14 +98,13 @@ const observer = new MutationObserver((mutations) => {
 // Start observing the <h1> element
 observer.observe(h1Element, { childList: true, attributes: true });
 
-// Document click event to show the next dialog
-document.body.addEventListener("click", () => {
+// Click event to show the next dialog
+document.body.addEventListener("click", (event) => {
+    // Prevent showing dialog on any click that is not in the dialog itself
+    if (event.target !== h1Element) return;
     if (altered) {
         showDialog(alterDialogs);
     } else {
         showDialog(dialogs);
     }
 });
-
-// Keep the initial background and text as they are
-dialogDiv.style.display = "none"; // Hide dialog initially

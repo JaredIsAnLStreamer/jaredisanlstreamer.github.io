@@ -1,7 +1,9 @@
-<html lang="en"><head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Counter Display</title>
+    <title>Carny Counter</title> 
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -11,16 +13,22 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
+            gap: 30px;
+            text-align: center;
+        }
+        .counter-container {
+            display: flex;
+            justify-content: center;
             gap: 30px;
         }
         .counter-box {
-            text-align: center;
             background-color: rgba(0, 0, 0, 0.7);
             padding: 20px 40px;
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(8px);
-            width: 350px; /* Wider box */
+            width: 350px;
         }
         .title {
             font-size: 2.2em;
@@ -50,12 +58,56 @@
             font-size: 3em;
         }
         .flames-180 {
-            background-color: rgba(0, 0, 0, 0.85); /* Slightly darker */
+            background-color: rgba(0, 0, 0, 0.85);
+        }
+        .difference-box {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            text-align: center;
+            margin-top: 30px;
+        }
+        .difference-title {
+            font-size: 1.8em;
+            color: white;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .difference-counter {
+            font-size: 2em;
+            color: white;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .other-grinds {
+            margin-top: 40px;
+            width: 90%;
+        }
+        .grind-box {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 15px 25px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            width: 300px;
+            display: inline-block;
+            text-align: center;
+        }
+        .grind-title {
+            font-size: 1.8em;
+            color: white;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .grind-counter {
+            font-size: 2em;
+            color: white;
+            font-weight: bold;
         }
         @media (max-width: 600px) {
-            .counter-box {
+            .counter-box, .grind-box {
+                width: 280px;
                 padding: 15px 30px;
-                width: 280px; /* Adjusted for smaller screens */
             }
             .counter {
                 font-size: 2em;
@@ -63,41 +115,105 @@
             .label {
                 font-size: 1em;
             }
+            .grind-title {
+                font-size: 1.5em;
+            }
+            .grind-counter {
+                font-size: 1.8em;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="counter-box">
-        <div class="title">Flames 200</div>
-        <div class="counter">
-            <div class="label">Bridge 1:</div>
-            <span>953</span>
+    <div class="counter-container">
+        <div class="counter-box">
+            <div class="title">Flames 200</div>
+            <div class="counter">
+                <div class="label">Bridge 1:</div>
+                <span id="flames200-bridge1">956</span>
+            </div>
+            <div class="counter">
+                <div class="label">Bridge 2:</div>
+                <span id="flames200-bridge2">240</span>
+            </div>
+            <div class="counter">
+                <div class="label">FC's to the Solo:</div>
+                <span id="flames200-fcSolo">57</span>
+            </div>
         </div>
-        <div class="counter">
-            <div class="label">Bridge 2:</div>
-            <span>239</span>
-        </div>
-        <div class="counter">
-            <div class="label">FC's to the Solo:</div>
-            <span>57</span>
+
+        <div class="counter-box flames-180">
+            <div class="title">Flames 180</div>
+            <div class="counter">
+                <div class="label">Bridge 1:</div>
+                <span id="flames180-bridge1">496</span>
+            </div>
+            <div class="counter">
+                <div class="label">Bridge 2:</div>
+                <span id="flames180-bridge2">141</span>
+            </div>
+            <div class="counter">
+                <div class="label">FC's to the Solo:</div>
+                <span id="flames180-fcSolo">30</span>
+            </div>
         </div>
     </div>
 
-    <div class="counter-box flames-180">
-        <div class="title">Flames 180</div>
-        <div class="counter">
-            <div class="label">Bridge 1:</div>
-            <span>496</span>
-        </div>
-        <div class="counter">
-            <div class="label">Bridge 2:</div>
-            <span>141</span>
-        </div>
-        <div class="counter">
-            <div class="label">FC's to the Solo:</div>
-            <span>30</span>
+    <div class="difference-box">
+        <div class="difference-title">Difference Between Flames 200 & Flames 180</div>
+        <div class="difference-counter" id="counter-difference">
+            <!-- Calculated difference will appear here -->
         </div>
     </div>
 
+    <div class="other-grinds">
+        <h2 class="title">Other Grinds</h2>
+        <div class="grind-box">
+            <div class="grind-title">Freebird</div>
+            <div class="grind-counter">FC's to Solo: 533</div>
+            <div class="grind-counter">FC's to Solo L: 18</div>
+            <div class="grind-counter">FC's to Solo O: 4</div>
+        </div>
+        <div class="grind-box">
+            <div class="grind-title">Supernovae</div>
+            <div class="grind-counter">Runs past Jarvis' Revenge: 250</div>
+            <div class="grind-counter">Runs past Singularity: 104</div>
+            <div class="grind-counter">FC's to the Solo: 14</div>
+        </div>
+        <div class="grind-box">
+            <div class="grind-title">Supernovae 110</div>
+            <div class="grind-counter">Runs past Jarvis' Revenge: 279</div>
+            <div class="grind-counter">Runs past Singularity: 87</div>
+            <div class="grind-counter">FC's to the Solo: 15</div>
+        </div>
+    </div>
 
-</body></html>
+    <script>
+        function calculateDifference() {
+            // Retrieve counter values from Flames 200 and Flames 180
+            const flames200Bridge1 = parseInt(document.getElementById('flames200-bridge1').textContent);
+            const flames180Bridge1 = parseInt(document.getElementById('flames180-bridge1').textContent);
+            const flames200Bridge2 = parseInt(document.getElementById('flames200-bridge2').textContent);
+            const flames180Bridge2 = parseInt(document.getElementById('flames180-bridge2').textContent);
+            const flames200FcSolo = parseInt(document.getElementById('flames200-fcSolo').textContent);
+            const flames180FcSolo = parseInt(document.getElementById('flames180-fcSolo').textContent);
+
+            // Calculate differences
+            const differenceBridge1 = flames200Bridge1 - flames180Bridge1;
+            const differenceBridge2 = flames200Bridge2 - flames180Bridge2;
+            const differenceFcSolo = flames200FcSolo - flames180FcSolo;
+
+            // Display differences
+            const differenceText = `
+                Bridge 1: ${differenceBridge1}<br>
+                Bridge 2: ${differenceBridge2}<br>
+                FC's to the Solo: ${differenceFcSolo}
+            `;
+            document.getElementById('counter-difference').innerHTML = differenceText;
+        }
+
+        // Call the function on page load to calculate the difference
+        calculateDifference();
+    </script>
+</body>
+</html>

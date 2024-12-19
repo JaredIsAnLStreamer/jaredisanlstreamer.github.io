@@ -1,0 +1,103 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter Display</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            height: 100vh;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+        }
+        .counter-box {
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(8px);
+            width: 350px; /* Wider box */
+        }
+        .title {
+            font-size: 2.2em;
+            color: white;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .counter {
+            font-size: 2.5em;
+            margin: 10px 0;
+            color: white;
+            font-weight: bold;
+            letter-spacing: 1px;
+            transition: transform 0.3s ease;
+        }
+        .counter:hover {
+            transform: scale(1.05);
+        }
+        .label {
+            font-size: 1.1em;
+            color: #f0f0f0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .counter span {
+            color: #00ff99;
+            font-size: 3em;
+        }
+        .flames-180 {
+            background-color: rgba(0, 0, 0, 0.85); /* Slightly darker */
+        }
+        @media (max-width: 600px) {
+            .counter-box {
+                padding: 15px 30px;
+                width: 280px; /* Adjusted for smaller screens */
+            }
+            .counter {
+                font-size: 2em;
+            }
+            .label {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="counter-box">
+        <div class="title">Flames 200</div>
+        <div class="counter">
+            <div class="label">Bridge 1:</div>
+            <span>953</span>
+        </div>
+        <div class="counter">
+            <div class="label">Bridge 2:</div>
+            <span>237</span>
+        </div>
+        <div class="counter">
+            <div class="label">FC's to the Solo:</div>
+            <span>57</span>
+        </div>
+    </div>
+
+    <div class="counter-box flames-180">
+        <div class="title">Flames 180</div>
+        <div class="counter">
+            <div class="label">Bridge 1:</div>
+            <span>496</span>
+        </div>
+        <div class="counter">
+            <div class="label">Bridge 2:</div>
+            <span>141</span>
+        </div>
+        <div class="counter">
+            <div class="label">FC's to the Solo:</div>
+            <span>30</span>
+        </div>
+    </div>
+
+
+</body></html>

@@ -183,6 +183,18 @@
         <h2 class="title">Other Grinds</h2>
         <!-- Added new grind boxes -->
         <div class="grind-box">
+            <div class="grind-title">Supernovae</div>
+            <div class="grind-counter">Runs past Jarvis' Revenge: 250</div>
+            <div class="grind-counter">Runs past Singularity: 104</div>
+            <div class="grind-counter">FC's to the Solo: 14</div>
+        </div>
+        <div class="grind-box">
+            <div class="grind-title">Supernovae 110</div>
+            <div class="grind-counter">Runs past Jarvis' Revenge: 279</div>
+            <div class="grind-counter">Runs past Singularity: 87</div>
+            <div class="grind-counter">FC's to the Solo: 15</div>
+        </div>
+        <div class="grind-box">
             <div class="grind-title">Soulless 6</div>
             <div class="grind-counter">FC's past Chorded: 218</div>
             <div class="grind-counter">FC's past Trilled: 44</div>
@@ -219,25 +231,23 @@
             const flames180Bridge1 = parseInt(document.getElementById('flames180-bridge1').textContent);
             const flames200Bridge2 = parseInt(document.getElementById('flames200-bridge2').textContent);
             const flames180Bridge2 = parseInt(document.getElementById('flames180-bridge2').textContent);
-            const flames200FcSolo = parseInt(document.getElementById('flames200-fcSolo').textContent);
-            const flames180FcSolo = parseInt(document.getElementById('flames180-fcSolo').textContent);
+            const flames200Solo = parseInt(document.getElementById('flames200-fcSolo').textContent);
+            const flames180Solo = parseInt(document.getElementById('flames180-fcSolo').textContent);
 
             // Calculate differences
-            const differenceBridge1 = flames200Bridge1 - flames180Bridge1;
-            const differenceBridge2 = flames200Bridge2 - flames180Bridge2;
-            const differenceFcSolo = flames200FcSolo - flames180FcSolo;
+            const bridge1Difference = flames200Bridge1 - flames180Bridge1;
+            const bridge2Difference = flames200Bridge2 - flames180Bridge2;
+            const soloDifference = flames200Solo - flames180Solo;
 
-            // Display differences
-            const differenceText = `
-                Bridge 1: ${differenceBridge1}<br>
-                Bridge 2: ${differenceBridge2}<br>
-                FC's to the Solo: ${differenceFcSolo}
+            // Display the difference
+            document.getElementById('counter-difference').innerHTML = `
+                Bridge 1 Difference: ${bridge1Difference} <br>
+                Bridge 2 Difference: ${bridge2Difference} <br>
+                FC's to Solo Difference: ${soloDifference}
             `;
-            document.getElementById('counter-difference').innerHTML = differenceText;
         }
 
-        // Call the function on page load to calculate the difference
-        calculateDifference();
+        calculateDifference(); // Initial calculation
     </script>
 </body>
 </html>

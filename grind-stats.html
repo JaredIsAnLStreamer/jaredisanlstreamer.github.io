@@ -181,8 +181,8 @@
     <div class="top-section">
         <div class="counter-box devil-box">
             <h2>The Devil Went Down to Georgia (175%)</h2>
-            <div class="stat"><div>Past Intro</div><span>2384</span></div>
-            <div class="stat"><div>Past Verse 2</div><span>762</span></div>
+            <div class="stat"><div>Past Intro</div><span>2391</span></div>
+            <div class="stat"><div>Past Verse 2</div><span>765</span></div>
             <div class="stat"><div>Past Devil Solo</div><span>151</span></div>
             <div class="stat"><div>To Victory Solo R</div><span>19</span></div>
             <div class="stat"><div>To Verse 4</div><span>0</span></div>
@@ -208,32 +208,40 @@
 
     <!-- Additional Data -->
     <h2 class="section-title">Additional Data</h2>
-    <div class="bottom-section">
-        <!-- Dropdown Section -->
-        <div class="dropdown-section">
-            <h2>Other Grinds</h2>
-            <select id="grind-select">
-                <option value="freebird">Free Bird (300%)</option>
-                <option value="supernovae">Supernovae</option>
-                <option value="supernovae110">Supernovae (110%)</option>
-                <option value="soulless6">Soulless 6</option>
-                <option value="soulless5">Soulless 5</option>
-                <option value="soulless4">Soulless 4</option>
-                <option value="soulless4110">Soulless 4 (110%)</option>
-                <option value="soulless2">Soulless 2</option>
-                <option value="obsidian">Obsidian</option>
-            </select>
-            <div id="grind-box" class="grind-box"></div>
-        </div>
+<div class="bottom-section">
+    <!-- Other Grinds Dropdown -->
+    <div class="dropdown-section">
+        <h2>Other Grinds</h2>
+        <select id="grind-select">
+            <option value="freebird">Free Bird (300%)</option>
+            <option value="supernovae">Supernovae</option>
+            <option value="supernovae110">Supernovae (110%)</option>
+            <option value="soulless6">Soulless 6</option>
+            <option value="soulless5">Soulless 5</option>
+            <option value="soulless4">Soulless 4</option>
+            <option value="soulless4110">Soulless 4 (110%)</option>
+            <option value="soulless2">Soulless 2</option>
+            <option value="obsidian">Obsidian</option>
+        </select>
+        <div id="grind-box" class="grind-box"></div>
+    </div>
 
-        <!-- Difference Box -->
-<div class="difference-box" style="width: 400px;"> <!-- Set same width as Other Grinds -->
-    <h2>Flames 200 vs 180</h2>
-    <div id="counter-difference"></div>
+    <!-- Difference Boxes Container -->
+    <div class="difference-container">
+        <div class="difference-box" style="width: 400px;">
+            <h2>Flames 200 vs 180</h2>
+            <div id="counter-difference"></div>
+        </div>
+        <div class="difference-box" style="width: 400px;">
+            <h2>Soulless 4 vs Soulless 4 (110%)</h2>
+            <div id="soulless-difference"></div>
+        </div>
+    </div>
 </div>
 
+
 <script>
-    // Difference Calculation
+    // Flames 200 vs 180 Difference
     function calculateDifference() {
         const f200B1 = parseInt(document.getElementById('flames200-bridge1').textContent);
         const f180B1 = parseInt(document.getElementById('flames180-bridge1').textContent);
@@ -243,12 +251,36 @@
         const f180Solo = parseInt(document.getElementById('flames180-fcSolo').textContent);
 
         document.getElementById('counter-difference').innerHTML = `
-            <div class="stat"><div>Bridge 1</div><span>${f200B1 - f180B1}</span></div>
-            <div class="stat"><div>Bridge 2</div><span>${f200B2 - f180B2}</span></div>
+            <div class="stat"><div>FC's Past Bridge 1</div><span>${f200B1 - f180B1}</span></div>
+            <div class="stat"><div>FC's Past Bridge 2</div><span>${f200B2 - f180B2}</span></div>
             <div class="stat"><div>FC's to Solo</div><span>${f200Solo - f180Solo}</span></div>
         `;
     }
     calculateDifference();
+
+    // Soulless 4 vs Soulless 4 110% Difference
+    function calculateSoullessDifference() {
+        // Raw data from the two versions
+        const s4Oil = 44; // FC's past Oilnations A
+        const s4110Oil = 146; // FC's past Machinations A
+
+        const s4Solo = 15;
+        const s4110Solo = 43;
+
+        const s4Stepping = 6;
+        const s4110Stepping = 21;
+
+        const s4Outro = 1;
+        const s4110Outro = 4;
+
+        document.getElementById('soulless-difference').innerHTML = `
+            <div class="stat"><div>FC's Past Machinations A</div><span>${s4110Oil - s4Oil}</span></div>
+            <div class="stat"><div>FC's to Solo</div><span>${s4110Solo - s4Solo}</span></div>
+            <div class="stat"><div>Runs Past Stepping</div><span>${s4110Stepping - s4Stepping}</span></div>
+            <div class="stat"><div>Outro Chokes</div><span>${s4110Outro - s4Outro}</span></div>
+        `;
+    }
+    calculateSoullessDifference();
 
     // Other Grinds Data
     const grinds = {

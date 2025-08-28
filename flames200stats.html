@@ -1,262 +1,308 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carny Counter</title> 
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            height: 100%;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Carny Counter</title>
+<style>
+    body {
+        margin: 0;
+        font-family: "Segoe UI", Tahoma, sans-serif;
+        background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1950&q=80') 
+                no-repeat center center/cover;
+        color: #f5f5f5;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+    }
+
+    h1 {
+        margin: 10px 0 20px;
+        font-size: 2.5rem;
+        color: #00d4ff;
+    }
+
+    h2.section-title {
+        margin-top: 30px;
+        margin-bottom: 20px;
+        font-size: 2rem;
+        color: #ffcc00;
+    }
+
+    /* --- Top Stats --- */
+    .top-section {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        width: 100%;
+        max-width: 1200px;
+    }
+
+    .counter-box {
+        background: #1e1e2f;
+        border: 2px solid #00d4ff;
+        border-radius: 12px;
+        padding: 15px 25px;
+        width: 360px;
+        min-height: 160px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        transition: transform 0.2s, box-shadow 0.3s;
+    }
+
+    .counter-box:hover {
+        transform: translateY(-3px);
+    }
+
+    .devil-box {
+        border-color: #ff4444;
+        box-shadow: 0 0 15px #ff4444;
+    }
+
+    .counter-box h2 {
+        margin: 0 0 10px;
+        font-size: 1.5rem;
+        color: #00ff99;
+        border-bottom: 1px solid #00ff99;
+        padding-bottom: 5px;
+    }
+
+    .devil-box h2 {
+        color: #ff6666;
+        border-color: #ff6666;
+    }
+
+    .stat {
+        display: flex;
+        justify-content: space-between;
+        padding: 4px 0;
+        font-size: 1.1rem;
+    }
+
+    .stat span {
+        color: #ffcc00;
+        font-weight: bold;
+    }
+
+    /* --- Bottom Section: Grinds + Difference --- */
+    .bottom-section {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        width: 100%;
+        max-width: 1200px;
+        margin-top: 30px;
+    }
+
+    /* Dropdown Section */
+    .dropdown-section {
+        background: #1b1b28;
+        border: 2px solid #6a11cb;
+        border-radius: 12px;
+        padding: 15px;
+        width: 400px;
+        text-align: center;
+    }
+
+    .dropdown-section select {
+        background: #121212;
+        color: #f5f5f5;
+        border: 1px solid #6a11cb;
+        padding: 8px;
+        font-size: 1rem;
+        border-radius: 6px;
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .grind-box {
+        background: #252538;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #6a11cb;
+    }
+
+    .grind-box h3 {
+        color: #6a11cb;
+        margin-bottom: 8px;
+    }
+
+    .grind-box .stat {
+        font-size: 1rem;
+    }
+
+    /* Difference box */
+    .difference-box {
+        background: #222;
+        border: 2px solid #ffcc00;
+        border-radius: 12px;
+        padding: 15px;
+        min-width: 300px;
+        text-align: center;
+        flex-shrink: 0;
+        align-self: flex-start;
+    }
+
+    .difference-box h2 {
+        margin-bottom: 10px;
+        color: #ffcc00;
+    }
+
+    /* Flames container below Devil box */
+    .flames-container {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    @media (max-width: 900px) {
+        .bottom-section {
             flex-direction: column;
-            gap: 30px;
-            overflow-x: hidden; /* Prevent horizontal scrolling */
-            overflow-y: auto; /* Enable vertical scrolling */
-            padding: 20px; /* Added padding for better spacing */
+            align-items: center;
         }
-        .counter-container {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            width: 100%;
-            flex-wrap: wrap;
-            justify-content: space-evenly;
+
+        .flames-container {
+            flex-direction: column;
+            align-items: center;
         }
-        .counter-box {
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 20px 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(8px);
-            width: 350px;
-            margin: 10px;
-        }
-        .title {
-            font-size: 2.2em;
-            color: white;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-        .counter {
-            font-size: 2.5em;
-            margin: 10px 0;
-            color: white;
-            font-weight: bold;
-            letter-spacing: 1px;
-            transition: transform 0.3s ease;
-        }
-        .counter:hover {
-            transform: scale(1.05);
-        }
-        .label {
-            font-size: 1.1em;
-            color: #f0f0f0;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .counter span {
-            color: #00ff99;
-            font-size: 3em;
-        }
-        .flames-180 {
-            background-color: rgba(0, 0, 0, 0.85);
-        }
-        .difference-box {
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 10px;
-            width: 95%; /* Nearly full width */
-            text-align: center;
-            margin-top: 30px;
-        }
-        .difference-title {
-            font-size: 1.8em;
-            color: white;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-        .difference-counter {
-            font-size: 2em;
-            color: white;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-        .other-grinds {
-            margin-top: 40px;
-            width: 100%;
-            text-align: center;
-        }
-        .other-grinds h2 {
-            font-size: 2.2em;
-            color: white;
-            margin-bottom: 20px;
-        }
-        .other-grinds .grind-box {
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 15px 25px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            width: 300px;
-            display: inline-block;
-            text-align: center;
-        }
-        .grind-title {
-            font-size: 1.8em;
-            color: white;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-        .grind-counter {
-            font-size: 2em;
-            color: white;
-            font-weight: bold;
-        }
-        @media (max-width: 600px) {
-            .counter-box, .grind-box {
-                width: 280px;
-                padding: 15px 30px;
-            }
-            .counter {
-                font-size: 2em;
-            }
-            .label {
-                font-size: 1em;
-            }
-            .grind-title {
-                font-size: 1.5em;
-            }
-            .grind-counter {
-                font-size: 1.8em;
-            }
-        }
-    </style>
+    }
+
+</style>
 </head>
 <body>
-    <div class="counter-container">
-        <div class="counter-box">
-            <div class="title">Flames 200</div>
-            <div class="counter">
-                <div class="label">Bridge 1:</div>
-                <span id="flames200-bridge1">1834</span>
-            </div>
-            <div class="counter">
-                <div class="label">Bridge 2:</div>
-                <span id="flames200-bridge2">663</span>
-            </div>
-            <div class="counter">
-                <div class="label">FC's to the Solo:</div>
-                <span id="flames200-fcSolo">228</span>
-            </div>
-            <div class="counter">
-                <div class="label">FC's past Solo:</div>
-                <span id="flames200-fcSolo">4</span>
-            </div>
-        </div>
+    <h1>Carny Counter</h1>
 
-        <div class="counter-box flames-180">
-            <div class="title">Flames 180</div>
-            <div class="counter">
-                <div class="label">Bridge 1:</div>
-                <span id="flames180-bridge1">496</span>
-            </div>
-            <div class="counter">
-                <div class="label">Bridge 2:</div>
-                <span id="flames180-bridge2">141</span>
-            </div>
-            <div class="counter">
-                <div class="label">FC's to the Solo:</div>
-                <span id="flames180-fcSolo">30</span>
-            </div>
+    <!-- Top Devil Box -->
+    <div class="top-section">
+        <div class="counter-box devil-box">
+            <h2>The Devil Went Down to Georgia (175%)</h2>
+            <div class="stat"><div>Past Intro</div><span>2381</span></div>
+            <div class="stat"><div>Past Verse 2</div><span>761</span></div>
+            <div class="stat"><div>Past Devil Solo</div><span>150</span></div>
+            <div class="stat"><div>To Victory Solo R</div><span>19</span></div>
+            <div class="stat"><div>To Verse 4</div><span>0</span></div>
         </div>
     </div>
 
-    <div class="difference-box">
-        <div class="difference-title">Difference Between Flames 200 & Flames 180</div>
-        <div class="difference-counter" id="counter-difference">
-            <!-- Calculated difference will appear here -->
-        </div>
+<div class="flames-container" style="margin-top: 30px;"> <!-- Added margin-top -->
+    <div class="counter-box">
+        <h2>Flames 200</h2>
+        <div class="stat"><div>Bridge 1</div><span id="flames200-bridge1">1834</span></div>
+        <div class="stat"><div>Bridge 2</div><span id="flames200-bridge2">663</span></div>
+        <div class="stat"><div>FC's to Solo</div><span id="flames200-fcSolo">228</span></div>
+        <div class="stat"><div>FC's past Solo</div><span>4</span></div>
     </div>
 
-    <div class="other-grinds">
-        <h2 class="title">Other Grinds</h2>
-                <div class="grind-box">
-            <div class="grind-title">Freebird 300</div>
-            <div class="grind-counter">FC's to Solo: 533</div>
-            <div class="grind-counter">FC's to Solo L: 18</div>
-            <div class="grind-counter">FC's to Solo O: 4</div>
-        </div>
-        <div class="grind-box">
-            <div class="grind-title">Supernovae</div>
-            <div class="grind-counter">Runs past Jarvis' Revenge: 250</div>
-            <div class="grind-counter">Runs past Singularity: 104</div>
-            <div class="grind-counter">FC's to the Solo: 14</div>
-        </div>
-        <div class="grind-box">
-            <div class="grind-title">Supernovae 110</div>
-            <div class="grind-counter">Runs past Jarvis' Revenge: 279</div>
-            <div class="grind-counter">Runs past Singularity: 87</div>
-            <div class="grind-counter">FC's to the Solo: 15</div>
-        </div>
-        <div class="grind-box">
-            <div class="grind-title">Soulless 6</div>
-            <div class="grind-counter">FC's past Chorded: 218</div>
-            <div class="grind-counter">FC's past Trilled: 44</div>
-            <div class="grind-counter">FC's past Strumming: 2</div>
-        </div>
-        <div class="grind-box">
-            <div class="grind-title">Soulless 5</div>
-            <div class="grind-counter">FC's to Solo: 15</div>
-        </div>
-        <div class="grind-box">
-            <div class="grind-title">Soulless 4</div>
-            <div class="grind-counter">FC's past Oilnations A: 44</div>
-            <div class="grind-counter">FC's to the Solo: 15</div>
-            <div class="grind-counter">Runs Past Stepping B: 6</div>
-            <div class="grind-counter">Outro Chokes: 1</div>
-        </div>
-        <div class="grind-box">
-            <div class="grind-title">Soulless 2</div>
-            <div class="grind-counter">Runs to Murderous Solo: 85</div>
-            <div class="grind-counter">-1 Counter: 11</div>
-        </div>
-        <div class="grind-box">
-            <div class="grind-title">Obsidian</div>
-            <div class="grind-counter">Runs up to Doomsday: 234</div>
-            <div class="grind-counter">Runs up to MTB: 79</div>
-            <div class="grind-counter">Reverse Chokes: 23</div>
-        </div>
+    <div class="counter-box">
+        <h2>Flames 180</h2>
+        <div class="stat"><div>Bridge 1</div><span id="flames180-bridge1">496</span></div>
+        <div class="stat"><div>Bridge 2</div><span id="flames180-bridge2">141</span></div>
+        <div class="stat"><div>FC's to Solo</div><span id="flames180-fcSolo">30</span></div>
     </div>
+</div>
 
-    <script>
-        function calculateDifference() {
-            // Retrieve counter values from Flames 200 and Flames 180
-            const flames200Bridge1 = parseInt(document.getElementById('flames200-bridge1').textContent);
-            const flames180Bridge1 = parseInt(document.getElementById('flames180-bridge1').textContent);
-            const flames200Bridge2 = parseInt(document.getElementById('flames200-bridge2').textContent);
-            const flames180Bridge2 = parseInt(document.getElementById('flames180-bridge2').textContent);
-            const flames200Solo = parseInt(document.getElementById('flames200-fcSolo').textContent);
-            const flames180Solo = parseInt(document.getElementById('flames180-fcSolo').textContent);
+    <!-- Additional Data -->
+    <h2 class="section-title">Additional Data</h2>
+    <div class="bottom-section">
+        <!-- Dropdown Section -->
+        <div class="dropdown-section">
+            <h2>Other Grinds</h2>
+            <select id="grind-select">
+                <option value="freebird">Free Bird (300%)</option>
+                <option value="supernovae">Supernovae</option>
+                <option value="supernovae110">Supernovae (110%)</option>
+                <option value="soulless6">Soulless 6</option>
+                <option value="soulless5">Soulless 5</option>
+                <option value="soulless4">Soulless 4</option>
+                <option value="soulless2">Soulless 2</option>
+                <option value="obsidian">Obsidian</option>
+            </select>
+            <div id="grind-box" class="grind-box"></div>
+        </div>
 
-            // Calculate differences
-            const bridge1Difference = flames200Bridge1 - flames180Bridge1;
-            const bridge2Difference = flames200Bridge2 - flames180Bridge2;
-            const soloDifference = flames200Solo - flames180Solo;
+        <!-- Difference Box -->
+<div class="difference-box" style="width: 400px;"> <!-- Set same width as Other Grinds -->
+    <h2>Flames 200 vs 180</h2>
+    <div id="counter-difference"></div>
+</div>
 
-            // Display the difference
-            document.getElementById('counter-difference').innerHTML = `
-                Bridge 1 Difference: ${bridge1Difference} <br>
-                Bridge 2 Difference: ${bridge2Difference} <br>
-                FC's to Solo Difference: ${soloDifference}
-            `;
-        }
+<script>
+    // Difference Calculation
+    function calculateDifference() {
+        const f200B1 = parseInt(document.getElementById('flames200-bridge1').textContent);
+        const f180B1 = parseInt(document.getElementById('flames180-bridge1').textContent);
+        const f200B2 = parseInt(document.getElementById('flames200-bridge2').textContent);
+        const f180B2 = parseInt(document.getElementById('flames180-bridge2').textContent);
+        const f200Solo = parseInt(document.getElementById('flames200-fcSolo').textContent);
+        const f180Solo = parseInt(document.getElementById('flames180-fcSolo').textContent);
 
-        calculateDifference(); // Initial calculation
-    </script>
+        document.getElementById('counter-difference').innerHTML = `
+            <div class="stat"><div>Bridge 1</div><span>${f200B1 - f180B1}</span></div>
+            <div class="stat"><div>Bridge 2</div><span>${f200B2 - f180B2}</span></div>
+            <div class="stat"><div>FC's to Solo</div><span>${f200Solo - f180Solo}</span></div>
+        `;
+    }
+    calculateDifference();
+
+    // Other Grinds Data
+    const grinds = {
+        freebird: [
+            "FC's to Solo: 533",
+            "FC's to Solo L: 18",
+            "FC's to Solo O: 4"
+        ],
+        supernovae: [
+            "Runs past Jarvis' Revenge: 250",
+            "Runs past Singularity: 104",
+            "FC's to the Solo: 14"
+        ],
+        supernovae110: [
+            "Runs past Jarvis' Revenge: 279",
+            "Runs past Singularity: 87",
+            "FC's to the Solo: 15"
+        ],
+        soulless6: [
+            "FC's past Chorded: 218",
+            "FC's past Trilled: 44",
+            "FC's past Strumming: 2"
+        ],
+        soulless5: [
+            "FC's to Solo: 15"
+        ],
+        soulless4: [
+            "FC's past Oilnations A: 44",
+            "FC's to the Solo: 15",
+            "Runs Past Stepping B: 6",
+            "Outro Chokes: 1"
+        ],
+        soulless2: [
+            "Runs to Murderous Solo: 85",
+            "-1 Counter: 11"
+        ],
+        obsidian: [
+            "Runs up to Doomsday: 234",
+            "Runs up to MTB: 79",
+            "Reverse Chokes: 23"
+        ]
+    };
+
+    const grindSelect = document.getElementById('grind-select');
+    const grindBox = document.getElementById('grind-box');
+
+    function updateGrindBox() {
+        const value = grindSelect.value;
+        const stats = grinds[value];
+        grindBox.innerHTML = `<h3>${grindSelect.options[grindSelect.selectedIndex].text}</h3>` +
+            stats.map(stat => `<div class="stat">${stat}</div>`).join('');
+    }
+
+    grindSelect.addEventListener('change', updateGrindBox);
+    updateGrindBox(); // initial
+</script>
 </body>
 </html>

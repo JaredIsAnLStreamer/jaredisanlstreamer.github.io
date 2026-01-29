@@ -1,0 +1,22 @@
+{
+  "type": "fc",
+  "songs": [
+    {
+      "title": "Through the Fire and Flames",
+      "artist": "DragonForce",
+      "charter": "Neversoft",
+      "youtubeId": "S5GpRJItqjw",
+      "chartDownload": "https://google.com",
+
+      "points": {
+        "Rake Strumming": 0,
+        "Alt Strumming": 40,
+        "Taco Strumming": 25,
+        "Fretting": 80,
+        "Tapping": 150,
+        "Sliding": 0,
+        "Chording": 20
+      }
+    }
+  ]
+}

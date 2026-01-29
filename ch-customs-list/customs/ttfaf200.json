@@ -1,0 +1,22 @@
+{
+  "type": "fc",
+  "songs": [
+    {
+      "title": "Through the Fire and Flames (200%)",
+      "artist": "DragonForce",
+      "charter": "Neversoft",
+      "youtubeId": "EhV9b0CiAtU",
+      "chartDownload": "https://google.com",
+
+      "points": {
+        "Rake Strumming": 400,
+        "Alt Strumming": 100,
+        "Taco Strumming": 800,
+        "Fretting": 400,
+        "Tapping": 1500,
+        "Sliding": 0,
+        "Chording": 200
+      }
+    }
+  ]
+}

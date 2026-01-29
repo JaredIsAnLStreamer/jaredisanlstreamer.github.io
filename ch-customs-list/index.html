@@ -77,7 +77,6 @@ body {
 
   main { padding: 1.2rem; }
 
-  /* GRID LIST */
   #grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -152,7 +151,6 @@ body {
   .fc { background: linear-gradient(135deg,#44ff99,#1db954); color:#000; }
   .pass { background: linear-gradient(135deg,#4aa3ff,#3b6cff); color:#000; }
 
-  /* DETAIL PAGE */
   #detailPage { display: none; }
 
   .detail-wrap {
@@ -328,12 +326,10 @@ body {
 </div>
 
 <main>
-  <!-- LIST VIEW -->
   <div id="listPage">
     <div id="grid"></div>
   </div>
 
-  <!-- DETAIL VIEW -->
   <div id="detailPage">
     <div class="detail-wrap">
       <div>
@@ -395,7 +391,6 @@ const listPage = document.getElementById("listPage");
 const detailPage = document.getElementById("detailPage");
 const backBtn = document.getElementById("backBtn");
 
-/* ---------- URL helpers ---------- */
 function setQuery(params) {
   const url = new URL(location.href);
   Object.entries(params).forEach(([k,v]) => {
@@ -409,7 +404,6 @@ function getQuery(key){
   return new URL(location.href).searchParams.get(key);
 }
 
-/* ---------- load data ---------- */
 async function loadCustoms() {
   const files = await fetch("customs/index.json").then(r => r.json());
 
@@ -433,7 +427,6 @@ async function loadCustoms() {
   route();
 }
 
-/* ---------- ranking ---------- */
 function getSortedList(list){
   return [...list].sort((a, b) => b.totalPoints - a.totalPoints);
 }
@@ -445,7 +438,6 @@ function getRankForSong(song){
   return idx >= 0 ? idx + 1 : null;
 }
 
-/* ---------- list render ---------- */
 function renderList(list) {
   grid.innerHTML = "";
   const sorted = getSortedList(list);
@@ -472,7 +464,6 @@ function renderList(list) {
     `;
 
     card.addEventListener("click", () => {
-      // "takes you to another page" (same file, different view)
       setQuery({
         song: e.title,
         yt: e.youtubeId
@@ -484,7 +475,6 @@ function renderList(list) {
   });
 }
 
-/* ---------- detail render ---------- */
 function showDetail(song){
   listPage.style.display = "none";
   detailPage.style.display = "block";
@@ -497,7 +487,6 @@ function showDetail(song){
 
   const banner = document.getElementById("heroBanner");
   banner.style.backgroundImage = `url('${thumb}')`;
-  // fallback if maxres doesn't exist
   const testImg = new Image();
   testImg.onload = () => {};
   testImg.onerror = () => banner.style.backgroundImage = `url('${thumbFallback}')`;
@@ -513,24 +502,15 @@ function showDetail(song){
 
   document.getElementById("heroTotal").textContent = `${song.totalPoints} pts`;
 
-  // stats panel
   document.getElementById("sTitle").textContent = song.title;
   document.getElementById("sArtist").textContent = song.artist;
   document.getElementById("sCharter").textContent = song.charter || "Unknown";
   document.getElementById("sType").textContent = song.status.toUpperCase();
   document.getElementById("sTotal").textContent = `${song.totalPoints} pts`;
 
-  // chart download
-  const chartBtn = document.getElementById("chartBtn");
-  chartBtn.href = song.chartDownload || "#";
-  chartBtn.style.opacity = song.chartDownload ? "1" : ".45";
-  chartBtn.style.pointerEvents = song.chartDownload ? "auto" : "none";
-
-  // youtube embed (first completion video)
   document.getElementById("ytEmbed").src =
     `https://www.youtube-nocookie.com/embed/${encodeURIComponent(song.youtubeId)}?rel=0`;
 
-  // point breakdown
   const breakdown = document.getElementById("breakdown");
   breakdown.innerHTML = "";
   const points = song.points || {};
@@ -539,6 +519,11 @@ function showDetail(song){
     row.className = "kv";
     row.innerHTML = `<div class="k">${escapeHtml(k)}</div><div class="v">${Number(v) || 0}</div>`;
     breakdown.appendChild(row);
+
+   const chartBtn = document.getElementById("chartBtn");
+  chartBtn.href = song.chartDownload || "#";
+  chartBtn.style.opacity = song.chartDownload ? "1" : ".45";
+  chartBtn.style.pointerEvents = song.chartDownload ? "auto" : "none";
   });
 }
 
@@ -550,7 +535,6 @@ function showList(){
 
   setQuery({ song: null, yt: null });
 
-  // rerender list using current search
   const q = search.value.toLowerCase().trim();
   if(!q) renderList(entries);
   else renderList(entries.filter(e =>
@@ -559,7 +543,6 @@ function showList(){
   ));
 }
 
-/* ---------- routing ---------- */
 function route(){
   const songTitle = getQuery("song");
   const yt = getQuery("yt");
@@ -573,7 +556,6 @@ function route(){
   }
 }
 
-/* ---------- search ---------- */
 search.addEventListener("input", () => {
   const q = search.value.toLowerCase().trim();
   renderList(entries.filter(e =>
@@ -582,11 +564,9 @@ search.addEventListener("input", () => {
   ));
 });
 
-/* ---------- back ---------- */
 backBtn.addEventListener("click", showList);
 window.addEventListener("popstate", route);
 
-/* ---------- util ---------- */
 function escapeHtml(str){
   return String(str)
     .replaceAll("&","&amp;")

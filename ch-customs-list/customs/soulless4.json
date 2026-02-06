@@ -1,0 +1,22 @@
+{
+  "type": "fc",
+  "songs": [
+    {
+      "title": "Soulless 4",
+      "artist": "ExileLord",
+      "charter": "ExileLord",
+      "youtubeId": "OTG7QEm98yk",
+      "chartDownload": "https://www.youtube.com/watch?v=pVnWsRHJRf4",
+
+      "points": {
+        "Rake Strumming": 300,
+        "Alt Strumming": 150,
+        "Taco Strumming": 200,
+        "Fretting": 150,
+        "Tapping": 1000,
+        "Sliding": 0,
+        "Chording": 400
+      }
+    }
+  ]
+}

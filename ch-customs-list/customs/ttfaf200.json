@@ -9,13 +9,13 @@
       "chartDownload": "https://google.com",
 
       "points": {
-        "Rake Strumming": 400,
+        "Rake Strumming": 500,
         "Alt Strumming": 100,
-        "Taco Strumming": 800,
-        "Fretting": 400,
-        "Tapping": 1500,
+        "Taco Strumming": 1000,
+        "Fretting": 500,
+        "Tapping": 1750,
         "Sliding": 0,
-        "Chording": 200
+        "Chording": 250
       }
     }
   ]

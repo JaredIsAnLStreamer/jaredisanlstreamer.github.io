@@ -1,0 +1,22 @@
+{
+  "type": "fc",
+  "songs": [
+    {
+      "title": "Soulless 3",
+      "artist": "Exilelord",
+      "charter": "Exilelord",
+      "youtubeId": "qHVxssGV-oM",
+      "chartDownload": "https://www.youtube.com/watch?v=me7_dSUBifQ",
+
+      "points": {
+        "Rake Strumming": 50,
+        "Alt Strumming": 80,
+        "Taco Strumming": 0,
+        "Fretting": 150,
+        "Tapping": 400,
+        "Sliding": 0,
+        "Chording": 20
+      }
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "type": "fc",
+  "songs": [
+    {
+      "title": "Soulless",
+      "artist": "ExileLord",
+      "charter": "ExileLord",
+      "youtubeId": "ya-RGJJCc-c",
+      "chartDownload": "https://drive.google.com/drive/folders/1DU0Ul9Qw_HPYRZi7K-3Keh-fOidfU6XQ",
+
+      "points": {
+        "Rake Strumming": 0,
+        "Alt Strumming": 125,
+        "Taco Strumming": 0,
+        "Fretting": 200,
+        "Tapping": 200,
+        "Sliding": 0,
+        "Chording": 100
+      }
+    }
+  ]
+}

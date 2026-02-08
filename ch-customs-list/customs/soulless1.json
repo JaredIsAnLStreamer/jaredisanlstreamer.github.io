@@ -12,10 +12,10 @@
         "Rake Strumming": 0,
         "Alt Strumming": 125,
         "Taco Strumming": 0,
-        "Fretting": 200,
+        "Fretting": 175,
         "Tapping": 200,
         "Sliding": 0,
-        "Chording": 100
+        "Chording": 75
       }
     }
   ]
